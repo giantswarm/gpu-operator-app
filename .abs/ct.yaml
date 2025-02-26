@@ -1,0 +1,2 @@
+chart-repos:
+- gpu-operator=https://nvidia.github.io/gpu-operator/deployments/gpu-operator

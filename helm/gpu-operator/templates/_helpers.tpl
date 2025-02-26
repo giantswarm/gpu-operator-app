@@ -35,3 +35,16 @@ helm.sh/chart: {{ include "gpu-operator.chart" . }}
 giantswarm.io/service-type: "managed"
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | default "tenet" | quote }}
 {{- end -}}
+
+{{/*
+Selector labels
+*/}}
+{{- define "gpu-operator.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "gpu-operator.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end -}}

@@ -3,7 +3,7 @@ name: gpu-operator
 description: A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Network Policies.
 dependencies:
   - name: gpu-operator
-    repository: "https://nvidia.github.io/gpu-operator"
+    repository: "https://helm.ngc.nvidia.com/nvidia"
     version: "24.9.2"
 appVersion: "24.9.2"
 version: 0.1.0

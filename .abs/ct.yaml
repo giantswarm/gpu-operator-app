@@ -1,2 +1,2 @@
 chart-repos:
-- gpu-operator=https://nvidia.github.io/gpu-operator/deployments/gpu-operator
+- gpu-operator=https://helm.ngc.nvidia.com/nvidia

@@ -8,5 +8,3 @@ checks:
   - non-existent-service-account
   - liveness-port
   - readiness-port
-
-

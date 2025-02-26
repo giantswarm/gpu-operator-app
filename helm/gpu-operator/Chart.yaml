@@ -1,0 +1,13 @@
+apiVersion: v2
+name: gpu-operator
+description: A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Network Policies.
+dependencies:
+  - name: gpu-operator
+    repository: "https://nvidia.github.io/gpu-operator"
+    version: "24.9.2"  # Adjust this to the latest stable version
+appVersion: "24.9.2"
+version: 0.1.0
+home: https://github.com/giantswarm/gpu-operator-app
+icon: https://s.giantswarm.io/app-icons/giantswarm/1/dark.svg
+annotations:
+  application.giantswarm.io/team: tenet

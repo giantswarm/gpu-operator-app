@@ -1,0 +1,29 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-nvidia-operator-validator-talk-to-apiserver
+  namespace: {{ .Release.Namespace }}
+spec:
+  egress:
+  - toEntities:
+    - kube-apiserver
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+      - port: "6443"
+        protocol: TCP
+  endpointSelector:
+    matchLabels:
+      app: nvidia-operator-validator
+  ingress:
+  - fromEntities:
+    - cluster
+    toPorts:
+    - ports:
+      - port: "6443"
+        protocol: TCP
+      - port: "8000"
+        protocol: TCP
+      - port: "8081"
+        protocol: TCP

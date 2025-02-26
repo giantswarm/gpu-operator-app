@@ -1,0 +1,37 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-node-feature-discovery-talk-to-apiserver
+  namespace: {{ .Release.Namespace }}
+spec:
+  egress:
+  - toEntities:
+    - kube-apiserver
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+      - port: "6443"
+        protocol: TCP
+      - port: "8081"
+        protocol: TCP
+      - port: "8082"
+        protocol: TCP
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: node-feature-discovery
+  ingress:
+  - fromEntities:
+    - cluster
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+      - port: "6443"
+        protocol: TCP
+      - port: "8000"
+        protocol: TCP
+      - port: "8081"
+        protocol: TCP
+      - port: "8082"
+        protocol: TCP

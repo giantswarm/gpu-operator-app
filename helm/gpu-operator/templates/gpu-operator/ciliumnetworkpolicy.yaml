@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: allow-gpu-operator-talk-to-apiserver
+  name: allow-{{ include "gpu-operator.fullname" . }}-talk-to-apiserver
   namespace: {{ .Release.Namespace }}
 spec:
   egress:
@@ -17,7 +17,7 @@ spec:
         protocol: TCP
   endpointSelector:
     matchLabels:
-      app.kubernetes.io/name: gpu-operator
+      app.kubernetes.io/name: {{ include "gpu-operator.name" . }}
   ingress:
   - fromEntities:
     - cluster

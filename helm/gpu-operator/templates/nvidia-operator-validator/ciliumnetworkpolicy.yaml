@@ -3,6 +3,9 @@ kind: CiliumNetworkPolicy
 metadata:
   name: allow-nvidia-operator-validator-talk-to-apiserver
   namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: "nvidia-operator-validator"
+    {{- include "gpu-operator.labels" . | nindent 4 }}
 spec:
   egress:
   - toEntities:

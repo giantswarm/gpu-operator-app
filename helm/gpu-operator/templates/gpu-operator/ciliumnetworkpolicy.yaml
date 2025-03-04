@@ -3,6 +3,9 @@ kind: CiliumNetworkPolicy
 metadata:
   name: allow-{{ include "gpu-operator.fullname" . }}-talk-to-apiserver
   namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: "gpu-operator"
+    {{- include "gpu-operator.labels" . | nindent 4 }}
 spec:
   egress:
   - toEntities:

@@ -1,0 +1,12 @@
+nodePools:
+  nodepool-1:
+    instanceType: g5.2xlarge
+    maxSize: 1
+    minSize: 1
+    rootVolumeSizeGB: 15
+    instanceWarmup: 600
+    minHealthyPercentage: 90
+    customNodeTaints:
+    - key: "nvidia.com/gpu"
+      value: "Exists"
+      effect: "NoSchedule"

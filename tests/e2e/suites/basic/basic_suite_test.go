@@ -40,28 +40,28 @@ func TestBasic(t *testing.T) {
 				wcClient, err := state.GetFramework().WC(state.GetCluster().Name)
 				Expect(err).Should(Succeed())
 
-				Eventually(func() (bool, error) {
+				Eventually(func() bool {
 					return validatorDaemonSetReady(wcClient, "nvidia-operator-validator")
 				}).
-					WithTimeout(15 * time.Minute).
-					WithPolling(15 * time.Second).
-					Should(Succeed())
+					WithTimeout(15*time.Minute).
+					WithPolling(15*time.Second).
+					Should(BeTrue(), "nvidia-operator-validator DaemonSet should be ready")
 			})
 		}).
 		Run(t, "Basic Test")
 }
 
-func validatorDaemonSetReady(wcClient client.Client, daemonSetName string) (bool, error) {
-	logger.Log("Checking if nvidia-operator-validator DaemonSet is in running state")
+func validatorDaemonSetReady(wcClient client.Client, daemonSetName string) bool {
 	daemonSet := appsv1.DaemonSet{}
 	err := wcClient.Get(state.GetContext(), types.NamespacedName{Name: daemonSetName, Namespace: namespace}, &daemonSet)
 	if err != nil {
-		logger.Log("Failed to get DaemonSet : %v", err)
-		return false, err
+		logger.Log("nvidia-operator-validator DaemonSet is not ready")
+		return false
 	}
 
-	if daemonSet.Status.DesiredNumberScheduled == daemonSet.Status.NumberReady {
-		return true, nil
+	if daemonSet.Status.DesiredNumberScheduled == daemonSet.Status.NumberReady && daemonSet.Status.DesiredNumberScheduled > 0 {
+		logger.Log("nvidia-operator-validator DaemonSet is ready, desired number scheduled: %d, number ready: %d", daemonSet.Status.DesiredNumberScheduled, daemonSet.Status.NumberReady)
+		return true
 	}
-	return false, nil
+	return false
 }

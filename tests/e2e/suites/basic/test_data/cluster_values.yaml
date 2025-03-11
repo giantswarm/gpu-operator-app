@@ -1,4 +1,6 @@
 global:
+  providerSpecific:
+    nodePoolAmi: ami-046223be54bcfde3b
   nodePools:
     nodepool-1:
       instanceType: g5.2xlarge

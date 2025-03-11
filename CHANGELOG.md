@@ -7,4 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Initial `gpu-operator`.
+
 [Unreleased]: https://github.com/giantswarm/gpu-operator-app/tree/main

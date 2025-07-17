@@ -12,7 +12,6 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/giantswarm/apptest-framework/pkg/config"
 	"github.com/giantswarm/apptest-framework/pkg/state"
 	"github.com/giantswarm/apptest-framework/pkg/suite"
 	"github.com/giantswarm/clustertest/pkg/logger"
@@ -24,7 +23,7 @@ const (
 )
 
 func TestBasic(t *testing.T) {
-	suite.New(config.MustLoad("../../config.yaml")).
+	suite.New().
 		WithInstallNamespace(namespace).
 		WithIsUpgrade(isUpgrade).
 		WithValuesFile("./values.yaml").

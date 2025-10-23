@@ -1,7 +1,5 @@
-appName: "gpu-operator"
-repoName: "gpu-operator-app"
-appCatalog: "giantswarm"
-
-# CAPI providers to test against when triggering `/run app-test-suites` from a PR
+appName: gpu-operator
+repoName: gpu-operator-app
+appCatalog: giantswarm
 providers:
 - capa

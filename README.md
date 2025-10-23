@@ -1,14 +1,14 @@
-
-<img alt="CircleCI" src="https://dl.circleci.com/status-badge/img/gh/giantswarm/gpu-operator-app/tree/main.svg?style=svg">
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/giantswarm/gpu-operator-app.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/giantswarm/gpu-operator-app)
 
 # gpu-operator-app
+
 Giant Swarm offers a GPU Operator app which can be installed in workload clusters when using GPU based instance types.
 
 Here, we define the GPU Operator upstream version with additional configuration and network policies.
 
 # Installation
 
-Installation can be done via Happa or by running `helm install gpu-operator ./helm/gpu-operator/ --namespace kube-system`.
+Installation can be done via Happa or by running `helm install --namespace kube-system gpu-operator helm/gpu-operator`.
 
 # Configuration
 
@@ -16,5 +16,4 @@ Installation can be done via Happa or by running `helm install gpu-operator ./he
 
 # Credit
 
-This app is based on the images and manifests provided by NVIDIA in their [GPU Operator](https://github.com/NVIDIA/gpu-operator/) project.
-
+This app is based on the images and manifests provided by NVIDIA in their [GPU Operator](https://github.com/NVIDIA/gpu-operator) project.

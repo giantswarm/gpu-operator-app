@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated E2E tests to use apptest-framework v1.14.0
+- Repository: Some chores.
+  - CircleCI: Update architect to v6.7.0.
 
 ## [0.1.0] - 2025-03-11
 

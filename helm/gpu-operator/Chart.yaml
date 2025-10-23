@@ -4,7 +4,7 @@ description: A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Netwo
 dependencies:
   - name: gpu-operator
     repository: "https://helm.ngc.nvidia.com/nvidia"
-    version: "25.3.2"
+    version: "v25.3.4"
 appVersion: "25.3.2"
 version: 0.1.0
 home: https://github.com/giantswarm/gpu-operator-app

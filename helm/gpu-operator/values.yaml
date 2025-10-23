@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# gpu-operator toolkit and driver SHOULD NOT be enabled by default because flatcar is taking care of the driver and toolkit installation.
+# gpu-operator toolkit and driver SHOULD NOT be enabled by default because Flatcar is taking care of the driver and toolkit installation.
 
 ## @section Global parameters
 
@@ -11,6 +11,7 @@ global:
   imageRegistry: gsoci.azurecr.io
 
 ## @section gpu-operator parameters
+
 gpu-operator:
 
   ## @section Driver parameters
@@ -22,7 +23,7 @@ gpu-operator:
     ## @param driver.manager Specifies the driver manager for the GPU Operator
     manager:
       ## @param driver.manager.repository Specifies the repository for the GPU Operator driver manager image
-      repository: "gsoci.azurecr.io/giantswarm"
+      repository: gsoci.azurecr.io/giantswarm
 
   ## @section Toolkit parameters
 
@@ -34,116 +35,118 @@ gpu-operator:
 
   operator:
     ## @param operator.repository Specifies the repository for the GPU Operator image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
     ## @param operator.initContainer Specifies the init container for the GPU Operator
     initContainer:
       ## @param operator.initContainer.repository Specifies the repository for the GPU Operator init container image
-      repository: "gsoci.azurecr.io/giantswarm"
+      repository: gsoci.azurecr.io/giantswarm
 
   ## @section Validator parameters
 
   validator:
     ## @param validator.repository Specifies the repository for the GPU Operator Validator image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section K8s driver manager parameters
 
   manager:
     ## @param manager.repository Specifies the repository for the K8s driver manager image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section Device Plugin parameters
 
   devicePlugin:
     ## @param devicePlugin.repository Specifies the repository for the K8s device plugin image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section DCGM parameters
 
   dcgm:
     ## @param dcgm.repository Specifies the repository for the dcgm hostengine image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section DCGM exporter parameters
 
   dcgmExporter:
     ## @param dcgmExporter.repository Specifies the repository for the dcgm exporter image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section gfd parameters
 
   gfd:
     ## @param gfd.repository Specifies the repository for the gfd image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section MIG Manager parameters
 
   migManager:
     ## @param migManager.repository Specifies the repository for the MIG Manager image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section Node Status Exporter parameters
 
   nodeStatusExporter:
     ## @param nodeStatusExporter.repository Specifies the repository for the Node Status Exporter image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section GDS parameters
 
   gds:
     ## @param gds.repository Specifies the repository for the GDS image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section GDRCopy parameters
 
   gdrCopy:
     ## @param gdrCopy.repository Specifies the repository for the GDRCopy image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section VGPU Manager parameters
 
   vgpuManager:
     ## @param vgpuManager.repository Specifies the repository for the VGPU Manager image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section VGPU Device Manager parameters
 
   vgpuDeviceManager:
     ## @param vgpuDeviceManager.repository Specifies the repository for the VGPU Device Manager image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section VFIO Manager parameters
 
   vfioManager:
     ## @param vfioManager.repository Specifies the repository for the VFIO Manager image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
     ## @param vfioManager.driverManager Specifies the driver manager for the VFIO Manager
     driverManager:
       ## @param vfioManager.driverManager.repository Specifies the repository for the VFIO Manager driver manager image
-      repository: "gsoci.azurecr.io/giantswarm"
+      repository: gsoci.azurecr.io/giantswarm
 
   ## @section KATA Manager parameters
 
   kataManager:
     ## @param kataManager.repository Specifies the repository for the KATA Manager image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section Sandbox Device Plugin parameters
 
   sandboxDevicePlugin:
     ## @param sandboxDevicePlugin.repository Specifies the repository for the Sandbox Device Plugin image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section CC Manager parameters
 
   ccManager:
     ## @param ccManager.repository Specifies the repository for the CC Manager image
-    repository: "gsoci.azurecr.io/giantswarm"
+    repository: gsoci.azurecr.io/giantswarm
 
   ## @section Node Feature Discovery parameters
+
   node-feature-discovery:
-    ## @section Image parameters
+    ## @param node-feature-discovery.image Specifies the image for the Node Feature Discovery
     image:
-      repository: "gsoci.azurecr.io/giantswarm/node-feature-discovery"
+      ## @param node-feature-discovery.image.repository Specifies the repository for the Node Feature Discovery image
+      repository: gsoci.azurecr.io/giantswarm/node-feature-discovery

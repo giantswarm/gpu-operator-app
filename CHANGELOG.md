@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Chart: Update GPU Operator to v25.3.4.
   - Tests: Update dependencies and configuration.
   - Repository: Update documentation.
+  - Chart: Fix KubeLinter.
 
 ## [0.1.0] - 2025-03-11
 

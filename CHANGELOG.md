@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Repository: Some chores.
   - CircleCI: Update architect to v6.7.0.
   - Chart: Update GPU Operator to v25.3.4.
+  - Tests: Update dependencies and configuration.
 
 ## [0.1.0] - 2025-03-11
 

@@ -12,9 +12,9 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/giantswarm/apptest-framework/pkg/state"
-	"github.com/giantswarm/apptest-framework/pkg/suite"
-	"github.com/giantswarm/clustertest/pkg/logger"
+	"github.com/giantswarm/apptest-framework/v2/pkg/state"
+	"github.com/giantswarm/apptest-framework/v2/pkg/suite"
+	"github.com/giantswarm/clustertest/v2/pkg/logger"
 )
 
 const (

@@ -10,7 +10,7 @@ A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Network Policies.
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://helm.ngc.nvidia.com/nvidia | gpu-operator | 25.3.4 |
+| https://helm.ngc.nvidia.com/nvidia | gpu-operator | v25.10.0 |
 
 ## Values
 

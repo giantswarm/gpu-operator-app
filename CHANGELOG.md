@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Update `gpu-operator` to v25.10.0. ([#17](https://github.com/giantswarm/gpu-operator-app/pull/17))
+
 ## [1.0.1] - 2025-10-23
 
 ### Changed

@@ -1,6 +1,6 @@
 # gpu-operator
 
-![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![AppVersion: 25.3.4](https://img.shields.io/badge/AppVersion-25.3.4-informational?style=flat-square)
+![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square) ![AppVersion: 25.10.1](https://img.shields.io/badge/AppVersion-25.10.1-informational?style=flat-square)
 
 A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Network Policies.
 
@@ -10,7 +10,7 @@ A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Network Policies.
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://helm.ngc.nvidia.com/nvidia | gpu-operator | v25.10.0 |
+| https://helm.ngc.nvidia.com/nvidia | gpu-operator | v25.10.1 |
 
 ## Values
 

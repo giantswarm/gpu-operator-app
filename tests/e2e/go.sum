@@ -114,6 +114,7 @@ github.com/giantswarm/apptest-framework/v2 v2.2.0 h1:o7RfTBqOSrXtNoCdnzkPuQdldf+
 github.com/giantswarm/apptest-framework/v2 v2.2.0/go.mod h1:nvKQJ2qJ5bSoloM+dT+rKSvxAVmeTH03pu0XfxxIkQM=
 github.com/giantswarm/apptest-framework/v2 v2.2.1 h1:OccPvTUpShrGDwI0ALyM3FCjcH/LYf50uvJSbO+zKeo=
 github.com/giantswarm/apptest-framework/v2 v2.2.1/go.mod h1:nvKQJ2qJ5bSoloM+dT+rKSvxAVmeTH03pu0XfxxIkQM=
+github.com/giantswarm/apptest-framework/v3 v3.0.0/go.mod h1:JguRxp+g86wSvmZDVfqcNla/XJRreqE2YFoA8GkXgks=
 github.com/giantswarm/cluster-standup-teardown/v2 v2.3.4 h1:DBF851emdjvbVBIHEJh3DAMEskmMQBZs/bUdPeLZiz4=
 github.com/giantswarm/cluster-standup-teardown/v2 v2.3.4/go.mod h1:A1Kiff90kBPTvXHMaJ7aMhtn/3q0R+Zt93gTgTI4DtQ=
 github.com/giantswarm/clustertest/v2 v2.2.2 h1:gUivtANdzNWwrKWdvWWGGwLRMUX1b5/l0JAqzZdOnI4=

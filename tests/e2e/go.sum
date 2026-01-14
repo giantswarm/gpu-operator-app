@@ -110,6 +110,8 @@ github.com/giantswarm/apiextensions-application v0.6.2 h1:XL86OrpprWl5Wp38EUvUXt
 github.com/giantswarm/apiextensions-application v0.6.2/go.mod h1:8ylqSmDSzFblCppRQTFo8v9s/F6MX6RTusVVoDDfWso=
 github.com/giantswarm/apptest-framework/v3 v3.0.0 h1:ChqUEeEw83OrwKrK2Evxf1RMAPKOGYIGQla5zdSgq0s=
 github.com/giantswarm/apptest-framework/v3 v3.0.0/go.mod h1:JguRxp+g86wSvmZDVfqcNla/XJRreqE2YFoA8GkXgks=
+github.com/giantswarm/apptest-framework/v3 v3.0.1 h1:PnIB10VIIi+Zi5uWNMvhXJaqeDL9biz9lFG1p1rQzy8=
+github.com/giantswarm/apptest-framework/v3 v3.0.1/go.mod h1:DbRjBUj+pYWd/BaeQVf73cLWgZ6gTyO/0WzBxnn/UCI=
 github.com/giantswarm/cluster-standup-teardown/v4 v4.0.0 h1:6vnWEDpRWslmX1egJO1kBcNRkXlVzDuZEpq62khdWeE=
 github.com/giantswarm/cluster-standup-teardown/v4 v4.0.0/go.mod h1:as+YNq8OkoLwaqc7rEuzs1IZm6S9vmtEhXIJe+X0q8w=
 github.com/giantswarm/clustertest/v3 v3.1.0 h1:7y57NcLa3kSgviLnLFhya8sTTo0aTriqJnL8xIVmFlI=
@@ -456,6 +458,8 @@ golang.org/x/term v0.38.0 h1:PQ5pkm/rLO6HnxFR7N2lJHOZX6Kez5Y1gDSJla6jo7Q=
 golang.org/x/term v0.38.0/go.mod h1:bSEAKrOT1W+VSu9TSCMtoGEOUcKxOKgl3LE5QEF/xVg=
 golang.org/x/text v0.32.0 h1:ZD01bjUt1FQ9WJ0ClOL5vxgxOI/sVCNgX1YtKwcY0mU=
 golang.org/x/text v0.32.0/go.mod h1:o/rUWzghvpD5TXrTIBuJU77MTaN0ljMWE47kxGJQ7jY=
+golang.org/x/text v0.33.0 h1:B3njUFyqtHDUI5jMn1YIr5B0IE2U0qck04r6d4KPAxE=
+golang.org/x/text v0.33.0/go.mod h1:LuMebE6+rBincTi9+xWTY8TztLzKHc/9C1uBCG27+q8=
 golang.org/x/time v0.14.0 h1:MRx4UaLrDotUKUdCIqzPC48t1Y9hANFKIRpNx+Te8PI=
 golang.org/x/time v0.14.0/go.mod h1:eL/Oa2bBBK0TkX57Fyni+NgnyQQN4LitPmob2Hjnqw4=
 golang.org/x/tools v0.40.0 h1:yLkxfA+Qnul4cs9QA3KnlFu0lVmd8JJfoq+E41uSutA=

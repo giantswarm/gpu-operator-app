@@ -6,7 +6,8 @@ appVersion: 25.10.1
 home: https://github.com/giantswarm/gpu-operator-app
 icon: https://s.giantswarm.io/app-icons/giantswarm/1/dark.svg
 annotations:
-  application.giantswarm.io/team: tenet
+  io.giantswarm.application.audience: all
+  io.giantswarm.application.team: tenet
 dependencies:
   - name: gpu-operator
     repository: https://helm.ngc.nvidia.com/nvidia

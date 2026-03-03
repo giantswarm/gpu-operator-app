@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Chart: Add `io.giantswarm.application.audience: all` annotation to `Chart.yaml`.
+- Chart: Migrate team annotation from `application.giantswarm.io/team` to `io.giantswarm.application.team: tenet`.
 
 ## [1.1.1] - 2025-12-05
 

@@ -11,4 +11,4 @@ annotations:
 dependencies:
   - name: gpu-operator
     repository: https://helm.ngc.nvidia.com/nvidia
-    version: v25.10.1
+    version: v26.3.1

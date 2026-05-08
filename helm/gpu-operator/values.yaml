@@ -14,11 +14,26 @@ global:
 
 gpu-operator:
 
+  ## @section Validator parameters
+
+  validator:
+    ## @param validator.repository Specifies the repository for the GPU Operator Validator image
+    repository: gsoci.azurecr.io/giantswarm
+
+  ## @section Operator parameters
+
+  operator:
+    ## @param operator.repository Specifies the repository for the GPU Operator image
+    repository: gsoci.azurecr.io/giantswarm
+
   ## @section Driver parameters
 
   driver:
     ## @param driver.enabled Specifies whether driver should be installed by GPU Operator
     enabled: false
+
+    ## @param driver.repository Specifies the repository for the GPU Operator driver image
+    repository: gsoci.azurecr.io/giantswarm
 
     ## @param driver.manager Specifies the driver manager for the GPU Operator
     manager:
@@ -31,27 +46,7 @@ gpu-operator:
     ## @param toolkit.enabled Specifies whether toolkit should be installed by GPU Operator
     enabled: false
 
-  ## @section Operator parameters
-
-  operator:
-    ## @param operator.repository Specifies the repository for the GPU Operator image
-    repository: gsoci.azurecr.io/giantswarm
-
-    ## @param operator.initContainer Specifies the init container for the GPU Operator
-    initContainer:
-      ## @param operator.initContainer.repository Specifies the repository for the GPU Operator init container image
-      repository: gsoci.azurecr.io/giantswarm
-
-  ## @section Validator parameters
-
-  validator:
-    ## @param validator.repository Specifies the repository for the GPU Operator Validator image
-    repository: gsoci.azurecr.io/giantswarm
-
-  ## @section K8s driver manager parameters
-
-  manager:
-    ## @param manager.repository Specifies the repository for the K8s driver manager image
+    ## @param toolkit.repository Specifies the repository for the GPU Operator toolkit image
     repository: gsoci.azurecr.io/giantswarm
 
   ## @section Device Plugin parameters
@@ -98,8 +93,8 @@ gpu-operator:
 
   ## @section GDRCopy parameters
 
-  gdrCopy:
-    ## @param gdrCopy.repository Specifies the repository for the GDRCopy image
+  gdrcopy:
+    ## @param gdrcopy.repository Specifies the repository for the GDRCopy image
     repository: gsoci.azurecr.io/giantswarm
 
   ## @section VGPU Manager parameters
@@ -107,6 +102,11 @@ gpu-operator:
   vgpuManager:
     ## @param vgpuManager.repository Specifies the repository for the VGPU Manager image
     repository: gsoci.azurecr.io/giantswarm
+
+    ## @param vgpuManager.driverManager Specifies the driver manager for the VGPU Manager
+    driverManager:
+      ## @param vgpuManager.driverManager.repository Specifies the repository for the VGPU Manager driver manager image
+      repository: gsoci.azurecr.io/giantswarm
 
   ## @section VGPU Device Manager parameters
 
@@ -125,16 +125,16 @@ gpu-operator:
       ## @param vfioManager.driverManager.repository Specifies the repository for the VFIO Manager driver manager image
       repository: gsoci.azurecr.io/giantswarm
 
-  ## @section KATA Manager parameters
-
-  kataManager:
-    ## @param kataManager.repository Specifies the repository for the KATA Manager image
-    repository: gsoci.azurecr.io/giantswarm
-
   ## @section Sandbox Device Plugin parameters
 
   sandboxDevicePlugin:
     ## @param sandboxDevicePlugin.repository Specifies the repository for the Sandbox Device Plugin image
+    repository: gsoci.azurecr.io/giantswarm
+
+  ## @section Kata Sandbox Device Plugin parameters
+
+  kataSandboxDevicePlugin:
+    ## @param kataSandboxDevicePlugin.repository Specifies the repository for the Kata Sandbox Device Plugin image
     repository: gsoci.azurecr.io/giantswarm
 
   ## @section CC Manager parameters

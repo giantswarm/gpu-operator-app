@@ -58,10 +58,13 @@
                                     "type": "string"
                                 }
                             }
+                        },
+                        "repository": {
+                            "type": "string"
                         }
                     }
                 },
-                "gdrCopy": {
+                "gdrcopy": {
                     "type": "object",
                     "properties": {
                         "repository": {
@@ -85,15 +88,7 @@
                         }
                     }
                 },
-                "kataManager": {
-                    "type": "object",
-                    "properties": {
-                        "repository": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "manager": {
+                "kataSandboxDevicePlugin": {
                     "type": "object",
                     "properties": {
                         "repository": {
@@ -133,14 +128,6 @@
                 "operator": {
                     "type": "object",
                     "properties": {
-                        "initContainer": {
-                            "type": "object",
-                            "properties": {
-                                "repository": {
-                                    "type": "string"
-                                }
-                            }
-                        },
                         "repository": {
                             "type": "string"
                         }
@@ -159,6 +146,9 @@
                     "properties": {
                         "enabled": {
                             "type": "boolean"
+                        },
+                        "repository": {
+                            "type": "string"
                         }
                     }
                 },
@@ -197,6 +187,14 @@
                 "vgpuManager": {
                     "type": "object",
                     "properties": {
+                        "driverManager": {
+                            "type": "object",
+                            "properties": {
+                                "repository": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "repository": {
                             "type": "string"
                         }

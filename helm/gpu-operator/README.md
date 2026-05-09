@@ -1,6 +1,6 @@
 # gpu-operator
 
-![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![AppVersion: 25.10.1](https://img.shields.io/badge/AppVersion-25.10.1-informational?style=flat-square)
+![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![AppVersion: 26.3.1](https://img.shields.io/badge/AppVersion-26.3.1-informational?style=flat-square)
 
 A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Network Policies.
 
@@ -10,7 +10,7 @@ A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Network Policies.
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://helm.ngc.nvidia.com/nvidia | gpu-operator | v25.10.1 |
+| https://helm.ngc.nvidia.com/nvidia | gpu-operator | v26.3.1 |
 
 ## Values
 
@@ -23,20 +23,21 @@ A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Network Policies.
 | gpu-operator.devicePlugin.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.driver.enabled | bool | `false` |  |
 | gpu-operator.driver.manager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
-| gpu-operator.gdrCopy.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
+| gpu-operator.driver.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
+| gpu-operator.gdrcopy.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.gds.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.gfd.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
-| gpu-operator.kataManager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
-| gpu-operator.manager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
+| gpu-operator.kataSandboxDevicePlugin.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.migManager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.node-feature-discovery.image.repository | string | `"gsoci.azurecr.io/giantswarm/node-feature-discovery"` |  |
 | gpu-operator.nodeStatusExporter.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
-| gpu-operator.operator.initContainer.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.operator.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.sandboxDevicePlugin.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.toolkit.enabled | bool | `false` |  |
+| gpu-operator.toolkit.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.validator.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.vfioManager.driverManager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.vfioManager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.vgpuDeviceManager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
+| gpu-operator.vgpuManager.driverManager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.vgpuManager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |

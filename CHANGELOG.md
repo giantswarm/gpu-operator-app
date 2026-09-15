@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Chart: Update `gpu-operator` to v26.7.0.
 
+### Fixed
+
+- Put Flatcar's `/opt/bin` on the toolkit validator's `PATH`. The injected `nvidia-smi` lives there rather than on the default container `PATH`, so `nvidia-operator-validator` failed with `exec: "nvidia-smi": executable file not found in $PATH`, leaving the device plugin, GFD and DCGM stuck in `Init` and the node advertising no `nvidia.com/gpu`.
+
 ## [1.3.0] - 2026-05-14
 
 ### Changed

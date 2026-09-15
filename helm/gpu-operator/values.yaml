@@ -19,6 +19,16 @@ gpu-operator:
   validator:
     ## @param validator.repository Specifies the repository for the GPU Operator Validator image
     repository: gsoci.azurecr.io/giantswarm
+    ## @param validator.toolkit.env Environment for the toolkit validation init container.
+    ## Flatcar ships the NVIDIA driver and container toolkit outside the FHS default
+    ## paths, so the injected nvidia-smi lands in /opt/bin, which is not on the
+    ## container PATH. Without this the toolkit validator fails with
+    ## `exec: "nvidia-smi": executable file not found in $PATH` and blocks the
+    ## device plugin, GFD and DCGM from ever starting.
+    toolkit:
+      env:
+        - name: PATH
+          value: /opt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
   ## @section Operator parameters
 

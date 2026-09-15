@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Put Flatcar's `/opt/bin` on the toolkit validator's `PATH`. The injected `nvidia-smi` lives there rather than on the default container `PATH`, so `nvidia-operator-validator` failed with `exec: "nvidia-smi": executable file not found in $PATH`, leaving the device plugin, GFD and DCGM stuck in `Init` and the node advertising no `nvidia.com/gpu`.
+- Add the missing `CiliumNetworkPolicy` for `gpu-feature-discovery`. The chart shipped policies for the operator, node-feature-discovery and the validator, but none selected `app: gpu-feature-discovery`, so GFD could not reach the API server (`dial tcp 172.31.0.1:443: i/o timeout`), crash-looped, and never published the `nvidia.com/gpu.*` node labels. Previously masked by the validator failure above, which stopped GFD from starting at all.
 
 ## [1.3.0] - 2026-05-14
 

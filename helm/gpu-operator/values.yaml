@@ -19,6 +19,16 @@ gpu-operator:
   validator:
     ## @param validator.repository Specifies the repository for the GPU Operator Validator image
     repository: gsoci.azurecr.io/giantswarm
+    ## @param validator.toolkit.env Environment for the toolkit validation init container.
+    ## Flatcar ships the NVIDIA driver and container toolkit outside the FHS default
+    ## paths, so the injected nvidia-smi lands in /opt/bin, which is not on the
+    ## container PATH. Without this the toolkit validator fails with
+    ## `exec: "nvidia-smi": executable file not found in $PATH` and blocks the
+    ## device plugin, GFD and DCGM from ever starting.
+    toolkit:
+      env:
+        - name: PATH
+          value: /opt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
   ## @section Operator parameters
 
@@ -150,3 +160,8 @@ gpu-operator:
     image:
       ## @param node-feature-discovery.image.repository Specifies the repository for the Node Feature Discovery image
       repository: gsoci.azurecr.io/giantswarm/node-feature-discovery
+    worker:
+      # -- Node selector of the Node Feature Discovery worker. Empty runs the worker on every node, as upstream does: every node with an NVIDIA PCI device is then labelled `nvidia.com/gpu.present=true` and gets the operands, driver or not. On a cluster whose general node pool may pick GPU instance families without a driver (AWS `g6f`, fractional-L4 spot), set it to the GPU node pool's label, `giantswarm.io/machine-pool: <cluster>-<pool>` — see "Scoping the operands to a GPU node pool".
+      nodeSelector: {}
+      # -- Node affinity of the Node Feature Discovery worker, the set form of `nodeSelector`: a `giantswarm.io/machine-pool In [<cluster>-<pool>, ...]` expression covers several GPU node pools.
+      affinity: {}

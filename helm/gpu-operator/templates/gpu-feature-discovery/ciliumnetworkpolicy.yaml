@@ -1,0 +1,21 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-gpu-feature-discovery-talk-to-apiserver
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: "gpu-feature-discovery"
+    {{- include "gpu-operator.labels" . | nindent 4 }}
+spec:
+  egress:
+  - toEntities:
+    - kube-apiserver
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+      - port: "6443"
+        protocol: TCP
+  endpointSelector:
+    matchLabels:
+      app: gpu-feature-discovery

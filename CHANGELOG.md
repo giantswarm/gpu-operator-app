@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Update `gpu-operator` to v26.7.0 (`appVersion` 26.7.0).
+
+### Fixed
+
+- Put Flatcar's `/opt/bin` on the toolkit validator's `PATH` (`gpu-operator.validator.toolkit.env`). The injected `nvidia-smi` lives there rather than on the default container `PATH`, so `nvidia-operator-validator` failed with `exec: "nvidia-smi": executable file not found in $PATH`, leaving the device plugin, GFD and DCGM stuck in `Init` and the node advertising no `nvidia.com/gpu`. ([#163](https://github.com/giantswarm/gpu-operator-app/pull/163))
+- Add the missing `CiliumNetworkPolicy` for `gpu-feature-discovery`. The chart shipped policies for the operator, node-feature-discovery and the validator, but none selected `app: gpu-feature-discovery`, so GFD could not reach the API server (`dial tcp 172.31.0.1:443: i/o timeout`), crash-looped, and never published the `nvidia.com/gpu.*` node labels. ([#163](https://github.com/giantswarm/gpu-operator-app/pull/163))
+
 ### Added
 
 - Chart: `gpu-operator.node-feature-discovery.worker.nodeSelector` and `.affinity` (documented, in the values schema, empty by default) scope Node Feature Discovery's worker — and with it `nvidia.com/gpu.present` and the operands — to the GPU node pool (`giantswarm.io/machine-pool=<cluster>-<pool>`). With the worker on every node, GPU-family nodes of a general Karpenter pool without a driver (AWS `g6f`, fractional-L4 spot) got the validator, device plugin and DCGM exporter stuck in `Init` and kept `ClusterPolicy` not ready. ([#164](https://github.com/giantswarm/gpu-operator-app/issues/164))

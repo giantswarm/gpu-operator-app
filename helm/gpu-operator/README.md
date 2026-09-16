@@ -1,6 +1,6 @@
 # gpu-operator
 
-![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![AppVersion: 26.3.1](https://img.shields.io/badge/AppVersion-26.3.1-informational?style=flat-square)
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![AppVersion: 26.7.0](https://img.shields.io/badge/AppVersion-26.7.0-informational?style=flat-square)
 
 A Helm chart to deploy NVIDIA GPU Operator with custom Cilium Network Policies.
 
@@ -50,6 +50,8 @@ A node without a worker gets no NFD labels, so neither `nvidia.com/gpu.present` 
 |-----|------|---------|-------------|
 | global.imageRegistry | string | `"gsoci.azurecr.io"` |  |
 | gpu-operator.validator.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
+| gpu-operator.validator.toolkit.env[0].name | string | `"PATH"` |  |
+| gpu-operator.validator.toolkit.env[0].value | string | `"/opt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"` |  |
 | gpu-operator.operator.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.driver.enabled | bool | `false` |  |
 | gpu-operator.driver.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |

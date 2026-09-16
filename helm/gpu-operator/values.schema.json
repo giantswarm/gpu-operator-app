@@ -114,6 +114,20 @@
                                     "type": "string"
                                 }
                             }
+                        },
+                        "worker": {
+                            "type": "object",
+                            "properties": {
+                                "nodeSelector": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    }
+                                },
+                                "affinity": {
+                                    "type": "object"
+                                }
+                            }
                         }
                     }
                 },

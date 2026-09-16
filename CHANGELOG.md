@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Chart: `gpu-operator.node-feature-discovery.worker.nodeSelector` and `.affinity` (documented, in the values schema, empty by default) scope Node Feature Discovery's worker — and with it `nvidia.com/gpu.present` and the operands — to the GPU node pool (`giantswarm.io/machine-pool=<cluster>-<pool>`). With the worker on every node, GPU-family nodes of a general Karpenter pool without a driver (AWS `g6f`, fractional-L4 spot) got the validator, device plugin and DCGM exporter stuck in `Init` and kept `ClusterPolicy` not ready. ([#164](https://github.com/giantswarm/gpu-operator-app/issues/164))
+
 ## [1.3.0] - 2026-05-14
 
 ### Changed

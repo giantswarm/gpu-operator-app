@@ -13,4 +13,36 @@
 
 {{ template "chart.requirementsSection" . }}
 
+## Scoping the operands to a GPU node pool
+
+The operator finds its nodes through Node Feature Discovery (NFD). The NFD worker runs on every node and labels each one that carries an NVIDIA PCI device `feature.node.kubernetes.io/pci-10de.present=true`; the operator turns that into `nvidia.com/gpu.present=true` and the `nvidia.com/gpu.deploy.*=true` state labels its operand DaemonSets (validator, device plugin, GPU feature discovery, DCGM exporter) select on. A node with an NVIDIA device but no driver gets the operands too, and they hang in `Init` at the driver validation while `ClusterPolicy` stays not ready. That is what happens when a general Karpenter pool picks a GPU-family instance as an ordinary spot node (AWS `g6f`, the fractional-L4 family) on a cluster whose driver lives in the GPU pool's machine image.
+
+On a cluster whose GPU nodes come from a dedicated pool, scope the worker to that pool — `giantswarm.io/machine-pool=<cluster>-<pool>` is the label every node of a Giant Swarm node pool carries:
+
+```yaml
+gpu-operator:
+  node-feature-discovery:
+    worker:
+      nodeSelector:
+        giantswarm.io/machine-pool: mycluster-gpu-l4
+```
+
+Several pools take the set form:
+
+```yaml
+gpu-operator:
+  node-feature-discovery:
+    worker:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: giantswarm.io/machine-pool
+                    operator: In
+                    values: [mycluster-gpu-l4, mycluster-gpu-a10g]
+```
+
+A node without a worker gets no NFD labels, so neither `nvidia.com/gpu.present` nor operands; the NFD master and garbage collector and the operator itself are Deployments and stay where they are. The worker's `NodeFeature` object is owned by its pod, so a node the worker leaves loses its NFD labels, the operator withdraws `nvidia.com/gpu.present` and the state labels, and operands already stuck there end — scoping a running installation needs no manual clean-up. Both values are empty by default: the chart then behaves as upstream and runs the worker everywhere. cluster-manager's `<cluster>-gpu-operator` release sets the set form for the cluster's GPU pools. The other way to keep the operands off such nodes is to keep GPU instance families out of the general pool's requirements.
+
 {{ template "chart.valuesSection" . }}

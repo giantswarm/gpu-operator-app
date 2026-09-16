@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-09-16
+
 ### Fixed
 
 - Chart: Give Node Feature Discovery's `post-delete` prune hook a `CiliumNetworkPolicy` of its own (`allow-node-feature-discovery-prune-talk-to-apiserver`, a `post-delete` hook of lower weight, deleted with the Job once it succeeded). Helm runs the hook after the release's policies are gone, so on a Cilium cluster with a default-deny policy the `nfd-master -prune` Job could not reach the API server (`dial tcp 172.31.0.1:443: i/o timeout`): the uninstall was retried for about five minutes, every attempt left the Job and a pod in `Error` in `kube-system`, and the NFD labels were never pruned. `gpu-operator.node-feature-discovery.postDeleteCleanup` (upstream's default `true`) is an explicit, documented value now; `false` skips the prune and the policy. ([#167](https://github.com/giantswarm/gpu-operator-app/issues/167))
@@ -70,7 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial `gpu-operator`.
 
-[Unreleased]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.1...HEAD
+[1.4.1]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/giantswarm/gpu-operator-app/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/giantswarm/gpu-operator-app/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/giantswarm/gpu-operator-app/compare/v1.1.1...v1.2.0

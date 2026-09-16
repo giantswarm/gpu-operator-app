@@ -107,6 +107,9 @@
                 "node-feature-discovery": {
                     "type": "object",
                     "properties": {
+                        "postDeleteCleanup": {
+                            "type": "boolean"
+                        },
                         "image": {
                             "type": "object",
                             "properties": {

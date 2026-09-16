@@ -156,6 +156,8 @@ gpu-operator:
   ## @section Node Feature Discovery parameters
 
   node-feature-discovery:
+    # -- Run Node Feature Discovery's `post-delete` hook, upstream's default: a Job `nfd-master -prune` that takes the NFD-managed labels, annotations and extended resources off the nodes when the release is uninstalled. The chart gives the hook a `CiliumNetworkPolicy` of its own (a `post-delete` hook of lower weight, deleted with the Job), so the prune reaches the API server on a cluster with a default-deny network policy — see "Uninstalling: the Node Feature Discovery prune hook". `false` skips the prune and its policy; the labels then stay on the nodes until Node Feature Discovery runs there again or the nodes are replaced.
+    postDeleteCleanup: true
     ## @param node-feature-discovery.image Specifies the image for the Node Feature Discovery
     image:
       ## @param node-feature-discovery.image.repository Specifies the repository for the Node Feature Discovery image

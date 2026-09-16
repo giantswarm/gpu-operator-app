@@ -16,6 +16,8 @@ Installation can be done via Happa or by running `helm install --namespace kube-
 
 On a cluster with a dedicated GPU node pool, scope Node Feature Discovery's worker to it (`gpu-operator.node-feature-discovery.worker.nodeSelector` or `.affinity` on `giantswarm.io/machine-pool=<cluster>-<pool>`), so that GPU-family nodes of the general pool without a driver get neither `nvidia.com/gpu.present` nor the operands — see [Scoping the operands to a GPU node pool](helm/gpu-operator/README.md#scoping-the-operands-to-a-gpu-node-pool).
 
+Uninstalling the release prunes the Node Feature Discovery labels from the nodes through a Helm `post-delete` hook, which the chart gives a network policy of its own — see [Uninstalling: the Node Feature Discovery prune hook](helm/gpu-operator/README.md#uninstalling-the-node-feature-discovery-prune-hook).
+
 # Credit
 
 This app is based on the images and manifests provided by NVIDIA in their [GPU Operator](https://github.com/NVIDIA/gpu-operator) project.

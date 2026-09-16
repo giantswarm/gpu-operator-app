@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Chart: Give Node Feature Discovery's `post-delete` prune hook a `CiliumNetworkPolicy` of its own (`allow-node-feature-discovery-prune-talk-to-apiserver`, a `post-delete` hook of lower weight, deleted with the Job once it succeeded). Helm runs the hook after the release's policies are gone, so on a Cilium cluster with a default-deny policy the `nfd-master -prune` Job could not reach the API server (`dial tcp 172.31.0.1:443: i/o timeout`): the uninstall was retried for about five minutes, every attempt left the Job and a pod in `Error` in `kube-system`, and the NFD labels were never pruned. `gpu-operator.node-feature-discovery.postDeleteCleanup` (upstream's default `true`) is an explicit, documented value now; `false` skips the prune and the policy. ([#167](https://github.com/giantswarm/gpu-operator-app/issues/167))
+
 ## [1.4.0] - 2026-09-16
 
 ### Changed
@@ -15,7 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Chart: Give Node Feature Discovery's `post-delete` prune hook a `CiliumNetworkPolicy` of its own (`allow-node-feature-discovery-prune-talk-to-apiserver`, a `post-delete` hook of lower weight, deleted with the Job once it succeeded). Helm runs the hook after the release's policies are gone, so on a Cilium cluster with a default-deny policy the `nfd-master -prune` Job could not reach the API server (`dial tcp 172.31.0.1:443: i/o timeout`): the uninstall was retried for about five minutes, every attempt left the Job and a pod in `Error` in `kube-system`, and the NFD labels were never pruned. `gpu-operator.node-feature-discovery.postDeleteCleanup` (upstream's default `true`) is an explicit, documented value now; `false` skips the prune and the policy. ([#167](https://github.com/giantswarm/gpu-operator-app/issues/167))
 - Put Flatcar's `/opt/bin` on the toolkit validator's `PATH` (`gpu-operator.validator.toolkit.env`). The injected `nvidia-smi` lives there rather than on the default container `PATH`, so `nvidia-operator-validator` failed with `exec: "nvidia-smi": executable file not found in $PATH`, leaving the device plugin, GFD and DCGM stuck in `Init` and the node advertising no `nvidia.com/gpu`. ([#163](https://github.com/giantswarm/gpu-operator-app/pull/163))
 - Add the missing `CiliumNetworkPolicy` for `gpu-feature-discovery`. The chart shipped policies for the operator, node-feature-discovery and the validator, but none selected `app: gpu-feature-discovery`, so GFD could not reach the API server (`dial tcp 172.31.0.1:443: i/o timeout`), crash-looped, and never published the `nvidia.com/gpu.*` node labels. ([#163](https://github.com/giantswarm/gpu-operator-app/pull/163))
 

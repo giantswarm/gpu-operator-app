@@ -1,0 +1,141 @@
+{{- if .Values.global.podSecurityStandards.enforced }}
+{{/*
+The NVIDIA GPU Operator cannot satisfy it: the upstream chart sets no
+securityContext on its own Deployment or on the pre-upgrade CRD Job, and exposes no
+values to add one, while the DaemonSets the operator creates at runtime need host
+access to talk to the driver.
+*/}}
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: gpu-operator-exceptions
+  namespace: policy-exceptions
+  labels:
+    {{- include "gpu-operator.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": "pre-install,pre-upgrade"
+    "helm.sh/hook-weight": "-5"
+spec:
+  exceptions:
+    - policyName: require-run-as-non-root-user
+      ruleNames:
+        - run-as-non-root-user
+        - autogen-run-as-non-root-user
+    - policyName: require-run-as-nonroot
+      ruleNames:
+        - run-as-non-root
+        - autogen-run-as-non-root
+    - policyName: disallow-privilege-escalation
+      ruleNames:
+        - privilege-escalation
+        - autogen-privilege-escalation
+    - policyName: disallow-capabilities-strict
+      ruleNames:
+        - require-drop-all
+        - adding-capabilities-strict
+        - autogen-require-drop-all
+        - autogen-adding-capabilities-strict
+    - policyName: restrict-seccomp-strict
+      ruleNames:
+        - check-seccomp-strict
+        - autogen-check-seccomp-strict
+    - policyName: disallow-host-path
+      ruleNames:
+        - host-path
+        - autogen-host-path
+    - policyName: restrict-volume-types
+      ruleNames:
+        - restricted-volumes
+        - autogen-restricted-volumes
+  match:
+    any:
+      - resources:
+          kinds:
+            - Deployment
+            - DaemonSet
+            - ReplicaSet
+            - Job
+            - Pod
+          namespaces:
+            - {{ .Release.Namespace }}
+          names:
+            # The operator Deployment and its pre-upgrade CRD Job. Neither has a
+            # securityContext and the upstream chart offers no value to set one.
+            - gpu-operator
+            - gpu-operator-*
+            # Node Feature Discovery. The worker DaemonSet mounts host paths to
+            # detect PCI devices; the rest only lack a seccompProfile.
+            - "*node-feature-discovery*"
+---
+{{/*
+The GPU DaemonSets are not part of this chart: the operator reconciles them from the
+ClusterPolicy after install, so they need an exception of their own. They are
+privileged by nature, mounting the driver root and the device nodes from the host.
+*/}}
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: gpu-operator-components-exceptions
+  namespace: policy-exceptions
+  labels:
+    {{- include "gpu-operator.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": "pre-install,pre-upgrade"
+    "helm.sh/hook-weight": "-5"
+spec:
+  exceptions:
+    - policyName: require-run-as-non-root-user
+      ruleNames:
+        - run-as-non-root-user
+        - autogen-run-as-non-root-user
+    - policyName: require-run-as-nonroot
+      ruleNames:
+        - run-as-non-root
+        - autogen-run-as-non-root
+    - policyName: disallow-privilege-escalation
+      ruleNames:
+        - privilege-escalation
+        - autogen-privilege-escalation
+    - policyName: disallow-privileged-containers
+      ruleNames:
+        - privileged-containers
+        - autogen-privileged-containers
+    - policyName: disallow-capabilities-strict
+      ruleNames:
+        - require-drop-all
+        - adding-capabilities-strict
+        - autogen-require-drop-all
+        - autogen-adding-capabilities-strict
+    - policyName: restrict-seccomp-strict
+      ruleNames:
+        - check-seccomp-strict
+        - autogen-check-seccomp-strict
+    - policyName: disallow-host-path
+      ruleNames:
+        - host-path
+        - autogen-host-path
+    - policyName: disallow-host-namespaces
+      ruleNames:
+        - host-namespaces
+        - autogen-host-namespaces
+    - policyName: disallow-host-ports
+      ruleNames:
+        - host-ports-none
+        - autogen-host-ports-none
+    - policyName: restrict-volume-types
+      ruleNames:
+        - restricted-volumes
+        - autogen-restricted-volumes
+  match:
+    any:
+      - resources:
+          kinds:
+            - DaemonSet
+            - Pod
+          namespaces:
+            - {{ .Release.Namespace }}
+          names:
+            # Created by the operator from the ClusterPolicy.
+            - nvidia-*
+            - gpu-feature-discovery*
+{{- end }}

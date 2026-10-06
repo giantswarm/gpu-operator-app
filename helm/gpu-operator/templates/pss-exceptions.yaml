@@ -1,14 +1,9 @@
 {{- if .Values.global.podSecurityStandards.enforced }}
 {{/*
-Giant Swarm enforces the Pod Security Standards restricted profile with Kyverno on
-every cluster. The NVIDIA GPU Operator cannot satisfy it: the upstream chart sets no
+The NVIDIA GPU Operator cannot satisfy it: the upstream chart sets no
 securityContext on its own Deployment or on the pre-upgrade CRD Job, and exposes no
 values to add one, while the DaemonSets the operator creates at runtime need host
-access to talk to the driver. Without these exceptions the release fails at admission
-and the gpu-operator namespace stays empty.
-
-Applied as a pre-install and pre-upgrade hook with a negative weight so the exceptions
-exist before the workloads and before the CRD Job (hook weight "1") are admitted.
+access to talk to the driver.
 */}}
 apiVersion: kyverno.io/v2
 kind: PolicyException

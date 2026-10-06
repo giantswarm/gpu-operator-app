@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Chart: Ship the Kyverno `PolicyException`s the GPU Operator needs under the restricted Pod Security Standards profile, so the app installs on a Giant Swarm cluster at all. The upstream chart sets no `securityContext` on its own Deployment or on the `pre-upgrade` CRD Job and exposes no values to add one, so admission rejected both (`disallow-capabilities-strict`, `restrict-seccomp-strict`, `require-run-as-nonroot`, `disallow-privilege-escalation`); the release failed and the `gpu-operator` namespace stayed empty. A second exception covers the privileged DaemonSets the operator reconciles from the ClusterPolicy after install (device plugin, operator validator, GFD, DCGM exporter), which are not part of this chart. Both are `pre-install,pre-upgrade` hooks with a negative weight so they exist before the workloads are admitted, and are gated on the new `global.podSecurityStandards.enforced` value (default `true`).
+- Chart: Ship the Kyverno `PolicyException`s the GPU Operator needs under the restricted Pod Security Standards profile. The upstream chart sets no `securityContext` on its own Deployment or on the `pre-upgrade` CRD Job and exposes no values to add one, so admission rejected both.
 
 ## [1.4.1] - 2026-09-16
 

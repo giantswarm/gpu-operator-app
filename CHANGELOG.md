@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.2] - 2026-10-06
+
 ### Fixed
 
 - Chart: Ship the Kyverno `PolicyException`s the GPU Operator needs under the restricted Pod Security Standards profile. The upstream chart sets no `securityContext` on its own Deployment or on the `pre-upgrade` CRD Job and exposes no values to add one, so admission rejected both.
@@ -76,7 +78,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial `gpu-operator`.
 
-[Unreleased]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.1...HEAD
+[Unreleased]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.2...HEAD
+[1.4.2]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/giantswarm/gpu-operator-app/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/giantswarm/gpu-operator-app/compare/v1.2.0...v1.3.0

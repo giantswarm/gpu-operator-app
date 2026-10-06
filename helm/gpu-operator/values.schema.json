@@ -7,6 +7,15 @@
             "properties": {
                 "imageRegistry": {
                     "type": "string"
+                },
+                "podSecurityStandards": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                        "enforced": {
+                            "type": "boolean"
+                        }
+                    }
                 }
             }
         },

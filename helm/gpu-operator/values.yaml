@@ -10,6 +10,10 @@ global:
   ## @param global.imageRegistry Global Docker image registry
   imageRegistry: gsoci.azurecr.io
 
+  podSecurityStandards:
+    ## @param global.podSecurityStandards.enforced Whether the cluster enforces the restricted Pod Security Standards profile. When true the chart ships the Kyverno PolicyExceptions the GPU Operator needs.
+    enforced: true
+
 ## @section gpu-operator parameters
 
 gpu-operator:

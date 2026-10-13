@@ -3,7 +3,7 @@ module e2e
 go 1.27.1
 
 require (
-	github.com/giantswarm/apptest-framework/v5 v5.3.3
+	github.com/giantswarm/apptest-framework/v5 v5.4.0
 	github.com/giantswarm/clustertest/v5 v5.6.3
 	github.com/onsi/ginkgo/v2 v2.33.1
 	github.com/onsi/gomega v1.44.0
@@ -56,7 +56,7 @@ require (
 	github.com/fsnotify/fsnotify v1.10.1 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.6 // indirect
 	github.com/giantswarm/apiextensions-application v0.6.2 // indirect
-	github.com/giantswarm/cluster-standup-teardown/v6 v6.0.11 // indirect
+	github.com/giantswarm/cluster-standup-teardown/v6 v6.1.0 // indirect
 	github.com/giantswarm/gitsemver/v2 v2.0.1 // indirect
 	github.com/giantswarm/gitsemver/v3 v3.0.1 // indirect
 	github.com/giantswarm/k8smetadata v0.26.0 // indirect

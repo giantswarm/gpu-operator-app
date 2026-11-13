@@ -80,6 +80,10 @@ gpu-operator:
   dcgmExporter:
     ## @param dcgmExporter.repository Specifies the repository for the dcgm exporter image
     repository: gsoci.azurecr.io/giantswarm
+    serviceMonitor:
+      # -- Labels added to the DCGM exporter's `ServiceMonitor`. The platform's metrics agent (`alloy-metrics`) only scrapes ServiceMonitors with an `observability.giantswarm.io/tenant` label, so without it no GPU metrics reach Mimir. The chart also ships a `CiliumNetworkPolicy` that lets `alloy-metrics` reach the exporter on port 9400.
+      additionalLabels:
+        observability.giantswarm.io/tenant: giantswarm
 
   ## @section gfd parameters
 

@@ -1,0 +1,21 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-alloy-metrics-scrape-nvidia-dcgm-exporter
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: "nvidia-dcgm-exporter"
+    {{- include "gpu-operator.labels" . | nindent 4 }}
+spec:
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app.kubernetes.io/instance: alloy-metrics
+        k8s:io.kubernetes.pod.namespace: kube-system
+    toPorts:
+    - ports:
+      - port: "9400"
+        protocol: TCP
+  endpointSelector:
+    matchLabels:
+      app: nvidia-dcgm-exporter

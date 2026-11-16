@@ -69,6 +69,7 @@ Helm runs the hooks of an uninstall after the release's objects are gone, the ch
 | gpu-operator.devicePlugin.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.dcgm.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.dcgmExporter.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
+| gpu-operator.dcgmExporter.serviceMonitor.additionalLabels | object | `{"observability.giantswarm.io/tenant":"giantswarm"}` | Labels added to the DCGM exporter's `ServiceMonitor`. The platform's metrics agent (`alloy-metrics`) only scrapes ServiceMonitors with an `observability.giantswarm.io/tenant` label, so without it no GPU metrics reach Mimir. The chart also ships a `CiliumNetworkPolicy` that lets `alloy-metrics` reach the exporter on port 9400. |
 | gpu-operator.gfd.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.migManager.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |
 | gpu-operator.nodeStatusExporter.repository | string | `"gsoci.azurecr.io/giantswarm"` |  |

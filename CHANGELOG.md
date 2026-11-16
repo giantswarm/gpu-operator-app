@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Chart: DCGM GPU metrics now reach Mimir. The exporter's `ServiceMonitor` gets the `observability.giantswarm.io/tenant: giantswarm` label that `alloy-metrics` selects on, and a new `CiliumNetworkPolicy` (`allow-alloy-metrics-scrape-nvidia-dcgm-exporter`) lets `alloy-metrics` reach the exporter on port 9400 through `kube-system`'s default-deny policy. Before, the exporter ran but no `DCGM_FI_DEV_*` series was ever ingested. ([giantswarm/giantswarm#39259](https://github.com/giantswarm/giantswarm/issues/39259))
+
 ## [1.4.2] - 2026-10-06
 
 ### Fixed

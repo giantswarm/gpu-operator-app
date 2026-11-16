@@ -13,4 +13,44 @@
 
 {{ template "chart.requirementsSection" . }}
 
+## Scoping the operands to a GPU node pool
+
+The operator finds its nodes through Node Feature Discovery (NFD). The NFD worker runs on every node and labels each one that carries an NVIDIA PCI device `feature.node.kubernetes.io/pci-10de.present=true`; the operator turns that into `nvidia.com/gpu.present=true` and the `nvidia.com/gpu.deploy.*=true` state labels its operand DaemonSets (validator, device plugin, GPU feature discovery, DCGM exporter) select on. A node with an NVIDIA device but no driver gets the operands too, and they hang in `Init` at the driver validation while `ClusterPolicy` stays not ready. That is what happens when a general Karpenter pool picks a GPU-family instance as an ordinary spot node (AWS `g6f`, the fractional-L4 family) on a cluster whose driver lives in the GPU pool's machine image.
+
+On a cluster whose GPU nodes come from a dedicated pool, scope the worker to that pool — `giantswarm.io/machine-pool=<cluster>-<pool>` is the label every node of a Giant Swarm node pool carries:
+
+```yaml
+gpu-operator:
+  node-feature-discovery:
+    worker:
+      nodeSelector:
+        giantswarm.io/machine-pool: mycluster-gpu-l4
+```
+
+Several pools take the set form:
+
+```yaml
+gpu-operator:
+  node-feature-discovery:
+    worker:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: giantswarm.io/machine-pool
+                    operator: In
+                    values: [mycluster-gpu-l4, mycluster-gpu-a10g]
+```
+
+A node without a worker gets no NFD labels, so neither `nvidia.com/gpu.present` nor operands; the NFD master and garbage collector and the operator itself are Deployments and stay where they are. The worker's `NodeFeature` object is owned by its pod, so a node the worker leaves loses its NFD labels, the operator withdraws `nvidia.com/gpu.present` and the state labels, and operands already stuck there end — scoping a running installation needs no manual clean-up. Both values are empty by default: the chart then behaves as upstream and runs the worker everywhere. cluster-manager's `<cluster>-gpu-operator` release sets the set form for the cluster's GPU pools. The other way to keep the operands off such nodes is to keep GPU instance families out of the general pool's requirements.
+
+## Uninstalling: the Node Feature Discovery prune hook
+
+Node Feature Discovery (NFD) labels the nodes its worker runs on (`feature.node.kubernetes.io/*`, and the `nvidia.com/gpu.*` labels GPU feature discovery publishes through it). Uninstalling the release removes the workloads, not the labels, so NFD's subchart ships a Helm `post-delete` hook — `gpu-operator.node-feature-discovery.postDeleteCleanup`, `true` by default as upstream — a Job `<release>-node-feature-discovery-prune` running `nfd-master -prune` that takes the NFD-managed labels, annotations and extended resources off every node.
+
+Helm runs the hooks of an uninstall after the release's objects are gone, the chart's `allow-node-feature-discovery-talk-to-apiserver` policy included. On a cluster with a default-deny network policy the prune pod cannot reach the API server then (`dial tcp <apiserver>:443: i/o timeout`): the hook fails, the uninstall is retried for minutes, every attempt leaves the Job and a pod in `Error` in the release namespace, and the labels stay. The chart therefore gives the hook a policy of its own, `allow-node-feature-discovery-prune-talk-to-apiserver`: a `post-delete` hook too, with a lower `helm.sh/hook-weight` so it exists before the Job, selecting the prune pod (`role: prune`) and allowing egress to the `kube-apiserver` entity. Both carry `helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded`: they are deleted once the prune succeeded, and a failed attempt is cleaned up before the next one.
+
+`postDeleteCleanup: false` renders neither. The NFD labels then outlive the uninstall until NFD runs on the node again or the node is replaced; with the worker scoped to a GPU node pool that is confined to the pool's nodes.
+
 {{ template "chart.valuesSection" . }}

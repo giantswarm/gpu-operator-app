@@ -10,6 +10,10 @@ global:
   ## @param global.imageRegistry Global Docker image registry
   imageRegistry: gsoci.azurecr.io
 
+  podSecurityStandards:
+    ## @param global.podSecurityStandards.enforced Whether the cluster enforces the restricted Pod Security Standards profile. When true the chart ships the Kyverno PolicyExceptions the GPU Operator needs.
+    enforced: true
+
 ## @section gpu-operator parameters
 
 gpu-operator:
@@ -76,6 +80,10 @@ gpu-operator:
   dcgmExporter:
     ## @param dcgmExporter.repository Specifies the repository for the dcgm exporter image
     repository: gsoci.azurecr.io/giantswarm
+    serviceMonitor:
+      # -- Labels added to the DCGM exporter's `ServiceMonitor`. The platform's metrics agent (`alloy-metrics`) only scrapes ServiceMonitors with an `observability.giantswarm.io/tenant` label, so without it no GPU metrics reach Mimir. The chart also ships a `CiliumNetworkPolicy` that lets `alloy-metrics` reach the exporter on port 9400.
+      additionalLabels:
+        observability.giantswarm.io/tenant: giantswarm
 
   ## @section gfd parameters
 
@@ -156,7 +164,14 @@ gpu-operator:
   ## @section Node Feature Discovery parameters
 
   node-feature-discovery:
+    # -- Run Node Feature Discovery's `post-delete` hook, upstream's default: a Job `nfd-master -prune` that takes the NFD-managed labels, annotations and extended resources off the nodes when the release is uninstalled. The chart gives the hook a `CiliumNetworkPolicy` of its own (a `post-delete` hook of lower weight, deleted with the Job), so the prune reaches the API server on a cluster with a default-deny network policy — see "Uninstalling: the Node Feature Discovery prune hook". `false` skips the prune and its policy; the labels then stay on the nodes until Node Feature Discovery runs there again or the nodes are replaced.
+    postDeleteCleanup: true
     ## @param node-feature-discovery.image Specifies the image for the Node Feature Discovery
     image:
       ## @param node-feature-discovery.image.repository Specifies the repository for the Node Feature Discovery image
       repository: gsoci.azurecr.io/giantswarm/node-feature-discovery
+    worker:
+      # -- Node selector of the Node Feature Discovery worker. Empty runs the worker on every node, as upstream does: every node with an NVIDIA PCI device is then labelled `nvidia.com/gpu.present=true` and gets the operands, driver or not. On a cluster whose general node pool may pick GPU instance families without a driver (AWS `g6f`, fractional-L4 spot), set it to the GPU node pool's label, `giantswarm.io/machine-pool: <cluster>-<pool>` — see "Scoping the operands to a GPU node pool".
+      nodeSelector: {}
+      # -- Node affinity of the Node Feature Discovery worker, the set form of `nodeSelector`: a `giantswarm.io/machine-pool In [<cluster>-<pool>, ...]` expression covers several GPU node pools.
+      affinity: {}

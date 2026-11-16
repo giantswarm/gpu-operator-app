@@ -7,6 +7,15 @@
             "properties": {
                 "imageRegistry": {
                     "type": "string"
+                },
+                "podSecurityStandards": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                        "enforced": {
+                            "type": "boolean"
+                        }
+                    }
                 }
             }
         },
@@ -34,6 +43,17 @@
                     "properties": {
                         "repository": {
                             "type": "string"
+                        },
+                        "serviceMonitor": {
+                            "type": "object",
+                            "properties": {
+                                "additionalLabels": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -107,11 +127,28 @@
                 "node-feature-discovery": {
                     "type": "object",
                     "properties": {
+                        "postDeleteCleanup": {
+                            "type": "boolean"
+                        },
                         "image": {
                             "type": "object",
                             "properties": {
                                 "repository": {
                                     "type": "string"
+                                }
+                            }
+                        },
+                        "worker": {
+                            "type": "object",
+                            "properties": {
+                                "nodeSelector": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    }
+                                },
+                                "affinity": {
+                                    "type": "object"
                                 }
                             }
                         }

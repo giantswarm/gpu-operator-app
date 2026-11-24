@@ -14,6 +14,15 @@ global:
     ## @param global.podSecurityStandards.enforced Whether the cluster enforces the restricted Pod Security Standards profile. When true the chart ships the Kyverno PolicyExceptions the GPU Operator needs.
     enforced: true
 
+## @section Kyverno PolicyException parameters
+
+kyvernoPolicyExceptions:
+  ## @param kyvernoPolicyExceptions.enabled Render the Kyverno PolicyExceptions the GPU Operator needs. They are only rendered when global.podSecurityStandards.enforced is true as well.
+  enabled: true
+  legacy:
+    ## @param kyvernoPolicyExceptions.legacy.enabled Renders the kyverno.io/v2 PolicyException, which applies to ClusterPolicies only. Will be used as a global switch in a future release.
+    enabled: true
+
 ## @section gpu-operator parameters
 
 gpu-operator:

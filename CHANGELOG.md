@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.3] - 2026-11-26
+
 ### Added
 
 - Chart: Add a `policies.kyverno.io/v1` PolicyException next to each `kyverno.io/v2` one, so the exceptions also apply to the CEL (ValidatingPolicy) versions of the policies. The CEL ones are rendered whenever `global.podSecurityStandards.enforced` is true; set `kyvernoPolicyExceptions.legacy.enabled: false` to stop rendering the legacy ones, or `kyvernoPolicyExceptions.enabled: false` to render none.
@@ -91,7 +93,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial `gpu-operator`.
 
-[Unreleased]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.2...HEAD
+[Unreleased]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.3...HEAD
+[1.4.3]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.2...v1.4.3
 [1.4.2]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/giantswarm/gpu-operator-app/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/giantswarm/gpu-operator-app/compare/v1.3.0...v1.4.0
